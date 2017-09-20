@@ -6,6 +6,8 @@
                     <div class="panel-heading">Timeline</div>
 
                     <div class="panel-body">
+                        <post-form></post-form>
+                        <hr>
                         <post v-for="post in posts" :post="post" :key="post.id"></post>
                     </div>
                 </div>
@@ -16,6 +18,7 @@
 
 <script>
     import Post from './Post'
+    import PostForm from './PostForm'
 
     export default {
         data() {
