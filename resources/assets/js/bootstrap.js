@@ -49,5 +49,5 @@ window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: 'your-pusher-key'
+    key: '6ca4bfae9701c6a66348'
 });
