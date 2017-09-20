@@ -9,6 +9,8 @@ class PostLikeController extends Controller
 {
     public function store(Request $request, Post $post)
     {
+        $this->authorize('like', $post);
+
         $like = $post->likes()->firstOrNew([
             'user_id' => $request->user()->id
         ]);

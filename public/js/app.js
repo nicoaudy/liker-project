@@ -42534,12 +42534,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         addPost: function addPost(post) {
             this.posts.unshift(post);
+        },
+        likePost: function likePost(postId) {
+            var i;
+            for (var i = 0; i <= this.posts.length; i++) {
+                if (this.posts[i].id === postId) {
+                    this.posts[i].likeCount++;
+                    this.posts[i].likeByCurrentUser = true;
+                    break;
+                }
+            }
         }
     },
     mounted: function mounted() {
         var _this = this;
 
         __WEBPACK_IMPORTED_MODULE_2__event_js___default.a.$on('post-added', this.addPost);
+        __WEBPACK_IMPORTED_MODULE_2__event_js___default.a.$on('post-liked', this.likePost);
 
         axios.get('/posts').then(function (response) {
             _this.posts = response.data;
@@ -42701,14 +42712,33 @@ exports.push([module.i, "\n.like[data-v-5ac34370] {\n    display: none;\n    pos
 
 /***/ }),
 /* 51 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_js__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__event_js__);
 //
 //
 //
 //
 //
 //
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['postId'],
+    methods: {
+        like: function like() {
+            var _this = this;
+
+            axios.post('/posts/' + this.postId + '/likes').then(function (response) {
+                __WEBPACK_IMPORTED_MODULE_0__event_js___default.a.$emit('post-liked', _this.postId);
+            });
+        }
+    }
+});
 
 /***/ }),
 /* 52 */
@@ -42718,22 +42748,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "like" }, [
+    _c(
+      "a",
+      {
+        staticClass: "btn btn-default like__button",
+        attrs: { href: "#" },
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            _vm.like($event)
+          }
+        }
+      },
+      [_vm._v("I like this")]
+    )
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "like" }, [
-      _c(
-        "a",
-        { staticClass: "btn btn-default like__button", attrs: { href: "#" } },
-        [_vm._v("I like this")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -42757,7 +42789,7 @@ var render = function() {
     [
       _vm.post.likedByCurrentUser === false &&
       _vm.post.canBeLikedByCurrentUser === true
-        ? _c("like-button")
+        ? _c("like-button", { attrs: { "post-id": _vm.post.id } })
         : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "media-left" }, [

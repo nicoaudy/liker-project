@@ -1,11 +1,25 @@
 <template>
     <div class="like">
-        <a href="#" class="btn btn-default like__button">I like this</a>
+        <a href="#" class="btn btn-default like__button" @click.prevent="like">I like this</a>
     </div>
 </template>
 
 <script>
+    import eventHub from '../event.js'
 
+    export default {
+        props: [
+            'postId'
+        ],
+        methods: {
+            like () {
+                axios.post('/posts/' + this.postId + '/likes')
+                .then(response => {
+                    eventHub.$emit('post-liked', this.postId)
+                })
+            }
+        }
+    }
 </script>
 
 <style scoped>

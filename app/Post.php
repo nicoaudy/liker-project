@@ -22,10 +22,6 @@ class Post extends Model
 
     public function getLikedByCurrentUserAttribute()
     {
-        if (auth()->check()) {
-            return false;
-        }
-
         return $this->likes->where('user_id', auth()->user()->id)->count() === 1;
     }
 

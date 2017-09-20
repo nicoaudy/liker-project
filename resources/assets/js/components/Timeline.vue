@@ -30,10 +30,21 @@
         methods: {
             addPost(post) {
                 this.posts.unshift(post)
+            },
+            likePost(postId) {
+                var i;
+                for (var i = 0; i <= this.posts.length; i++) {
+                    if (this.posts[i].id === postId) {
+                        this.posts[i].likeCount++
+                        this.posts[i].likeByCurrentUser = true
+                        break;
+                    }
+                }
             }
         },
         mounted() {
             eventHub.$on('post-added', this.addPost)
+            eventHub.$on('post-liked', this.likePost)
 
             axios.get('/posts').then(response => {
                 this.posts = response.data
