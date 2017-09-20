@@ -42043,6 +42043,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Post___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Post__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PostForm__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PostForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__PostForm__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__event_js__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__event_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__event_js__);
 //
 //
 //
@@ -42061,6 +42063,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -42071,8 +42074,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             posts: []
         };
     },
+
+    methods: {
+        addPost: function addPost(post) {
+            this.posts.unshift(post);
+        }
+    },
     mounted: function mounted() {
         var _this = this;
+
+        __WEBPACK_IMPORTED_MODULE_2__event_js___default.a.$on('post-added', this.addPost);
 
         axios.get('/posts').then(function (response) {
             _this.posts = response.data;
@@ -42685,6 +42696,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_js__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__event_js__);
 //
 //
 //
@@ -42694,6 +42707,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -42709,6 +42724,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('posts', {
                 body: this.body
             }).then(function (response) {
+                __WEBPACK_IMPORTED_MODULE_0__event_js___default.a.$emit('post-added', response.data);
                 _this.body = null;
             });
         }
@@ -42781,6 +42797,12 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-231d5cea", module.exports)
   }
 }
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports) {
+
+module.exports = new Vue();
 
 /***/ })
 /******/ ]);

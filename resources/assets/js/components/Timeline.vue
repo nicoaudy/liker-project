@@ -19,6 +19,7 @@
 <script>
     import Post from './Post'
     import PostForm from './PostForm'
+    import eventHub from '../event.js'
 
     export default {
         data() {
@@ -26,7 +27,14 @@
                 posts: []
             }
         },
+        methods: {
+            addPost(post) {
+                this.posts.unshift(post)
+            }
+        },
         mounted() {
+            eventHub.$on('post-added', this.addPost)
+
             axios.get('/posts').then(response => {
                 this.posts = response.data
             })

@@ -8,6 +8,8 @@
 </template>
 
 <script>
+    import eventHub from '../event.js'
+
     export default {
         data() {
             return {
@@ -19,6 +21,7 @@
                 axios.post('posts', {
                     body: this.body
                 }).then(response => {
+                    eventHub.$emit('post-added', response.data)
                     this.body = null
                 })
             }
