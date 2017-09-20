@@ -39,4 +39,9 @@ class User extends Authenticatable
     {
         return 'http://gravatar.com/avatar/' . md5($this->email) . '?s=45&d=mm';
     }
+
+    public function likes()
+    {
+        return $this->morphMany(Like::class, 'likeable');
+    }
 }
