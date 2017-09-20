@@ -1355,7 +1355,8 @@ Vue.component('post-form', __webpack_require__(13));
 Vue.component('like-button', __webpack_require__(12));
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: window.Laravel
 });
 
 /***/ }),
@@ -42646,6 +42647,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -42754,7 +42756,10 @@ var render = function() {
     "div",
     { staticClass: "media" },
     [
-      _c("like-button"),
+      _vm.post.likedByCurrentUser === false &&
+      _vm.$root.user.id !== _vm.post.user.id
+        ? _c("like-button")
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "media-left" }, [
         _c("a", { attrs: { href: "#" } }, [

@@ -1,6 +1,7 @@
 <template>
     <div class="media">
-        <like-button></like-button>
+        <like-button v-if="post.likedByCurrentUser === false && $root.user.id !== post.user.id"></like-button>
+
         <div class="media-left">
             <a href="#">
                 <img class="media-object" :src="post.user.avatar" :alt="post.user.name + ' avatar' ">
