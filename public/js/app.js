@@ -1355,8 +1355,7 @@ Vue.component('post-form', __webpack_require__(13));
 Vue.component('like-button', __webpack_require__(12));
 
 var app = new Vue({
-  el: '#app',
-  data: window.Laravel
+  el: '#app'
 });
 
 /***/ }),
@@ -42757,7 +42756,7 @@ var render = function() {
     { staticClass: "media" },
     [
       _vm.post.likedByCurrentUser === false &&
-      _vm.$root.user.id !== _vm.post.user.id
+      _vm.post.canBeLikedByCurrentUser === true
         ? _c("like-button")
         : _vm._e(),
       _vm._v(" "),

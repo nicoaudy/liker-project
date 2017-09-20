@@ -21,6 +21,5 @@ Vue.component('post-form', require('./components/PostForm.vue'));
 Vue.component('like-button', require('./components/LikeButton.vue'));
 
 const app = new Vue({
-    el: '#app',
-    data: window.Laravel
+    el: '#app'
 });
