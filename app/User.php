@@ -31,4 +31,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+
+    // Add some additional avatar attribute using getAvatarAttribute()
+    protected $appends = ['avatar'];
+
+    public function getAvatarAttribute()
+    {
+        return 'http://gravatar.com/avatar/' . md5($this->email) . '?s=45&d=mm';
+    }
 }
