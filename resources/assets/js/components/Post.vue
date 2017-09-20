@@ -1,22 +1,26 @@
 <template>
-    <div class="wrapper__post">
-        <div class="media">
-            <div class="media-left">
-                <a href="#">
-                    <img class="media-object" :src="post.user.avatar" :alt="post.user.name + ' avatar' ">
-                </a>
-            </div>
-            <div class="media-body">
-                <strong>{{ post.user.name }}</strong>
-                <p>{{ post.body }}</p>
-            </div>
+    <div class="media">
+        <like-button></like-button>
+        <div class="media-left">
+            <a href="#">
+                <img class="media-object" :src="post.user.avatar" :alt="post.user.name + ' avatar' ">
+            </a>
+        </div>
+        <div class="media-body">
+            <strong>{{ post.user.name }}</strong>
+            <p>{{ post.body }}</p>
         </div>
     </div>
 </template>
 
 <script>
+    import LikeButton from './LikeButton'
+
     export default {
-        props: ['post']
+        props: ['post'],
+        components: [
+            LikeButton
+        ]
     }
 </script>
 
@@ -25,5 +29,9 @@
         position: relative;
         margin: 0;
         padding: 10px;
+    }
+
+    .media:hover .like {
+        display: block;
     }
 </style>
