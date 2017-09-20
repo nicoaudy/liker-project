@@ -9,18 +9,23 @@
         <div class="media-body">
             <strong>{{ post.user.name }}</strong>
             <p>{{ post.body }}</p>
+            <p>{{ post.likeCount }}  {{ pluralize('like', post.likeCount) }}</p>
         </div>
     </div>
 </template>
 
 <script>
+    import pluralize from 'pluralize'
     import LikeButton from './LikeButton'
 
     export default {
         props: ['post'],
         components: [
             LikeButton
-        ]
+        ],
+        methods: {
+            pluralize
+        }
     }
 </script>
 
