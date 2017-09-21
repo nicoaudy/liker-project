@@ -19,3 +19,7 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 Broadcast::channel('posts', function ($user) {
     return true;
 });
+
+Broadcast::channel('likes', function ($user) {
+    return true;
+});
