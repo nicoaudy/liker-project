@@ -47490,6 +47490,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 __WEBPACK_IMPORTED_MODULE_2__event_js___default.a.$emit('post-added', e.post);
             });
 
+            Echo.private('likes').listen('PostWasLiked', function (e) {
+                __WEBPACK_IMPORTED_MODULE_2__event_js___default.a.$emit('post-liked', e.post.id);
+            });
+
             _this.posts = response.data;
         });
     }

@@ -54,6 +54,10 @@
                     eventHub.$emit('post-added', e.post)
                 })
 
+                Echo.private('likes').listen('PostWasLiked', (e) => {
+                    eventHub.$emit('post-liked', e.post.id)
+                })
+
                 this.posts = response.data
             })
         }
