@@ -14,3 +14,8 @@
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+// return true for authenticating private channel
+Broadcast::channel('posts', function ($user) {
+    return true;
+});
