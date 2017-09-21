@@ -34,7 +34,10 @@ class PostWasLiked implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('likes');
+        return [
+            new PrivateChannel('likes'),
+            new PrivateChannel('App.User.'. $this->post->user->id)
+        ];
     }
 
     public function broadcastWith()

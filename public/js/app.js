@@ -47497,6 +47497,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 __WEBPACK_IMPORTED_MODULE_2__event_js___default.a.$emit('post-liked', e.post.id, false);
             });
 
+            // for broadcast and give notification to another user when post was liked
+            Echo.private('App.User.' + _this.$root.user.id).listen('PostWasLiked', function (e) {
+                console.log(e);
+            });
+
             _this.posts = response.data;
         });
     }

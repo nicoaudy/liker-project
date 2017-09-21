@@ -61,6 +61,11 @@
                     eventHub.$emit('post-liked', e.post.id, false)
                 })
 
+                // for broadcast and give notification to another user when post was liked
+                Echo.private('App.User.' + this.$root.user.id).listen('PostWasLiked', (e) => {
+                    console.log(e)
+                })
+
                 this.posts = response.data
             })
         }
