@@ -66,7 +66,7 @@
                         // for broadcast and give notification to another user when post was liked
                         Echo.private('App.User.' + this.$root.user.id).listen('PostWasLiked', (e) => {
                             new Notification('Post liked', {
-                                body: 'x liked your post "' + e.post.body + '"'
+                                body: e.user.name + ' liked your post "' + e.post.body + '"'
                             })
                         })
                     })

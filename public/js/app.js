@@ -47502,7 +47502,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     // for broadcast and give notification to another user when post was liked
                     Echo.private('App.User.' + _this.$root.user.id).listen('PostWasLiked', function (e) {
                         new Notification('Post liked', {
-                            body: 'x liked your post "' + e.post.body + '"'
+                            body: e.user.name + ' liked your post "' + e.post.body + '"'
                         });
                     });
                 });
