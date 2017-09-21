@@ -47,6 +47,13 @@
             eventHub.$on('post-liked', this.likePost)
 
             axios.get('/posts').then(response => {
+                // listen to event in postwascreated in laravel side, and the name of
+                // the channel must same in PostWasCreated Class
+                Echo.private('posts').listen('PostWasCreated', (e) => {
+                    // console.log(e)
+                    eventHub.$emit('post-added', e.post)
+                })
+
                 this.posts = response.data
             })
         }

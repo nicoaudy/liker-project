@@ -1417,7 +1417,8 @@ window.Pusher = __webpack_require__(43);
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
   broadcaster: 'pusher',
-  key: '6ca4bfae9701c6a66348'
+  key: '30519f578e93bb463fec',
+  cluster: 'eu'
 });
 
 /***/ }),
@@ -47481,6 +47482,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         __WEBPACK_IMPORTED_MODULE_2__event_js___default.a.$on('post-liked', this.likePost);
 
         axios.get('/posts').then(function (response) {
+            // listen to event in postwascreated in laravel side, and the name of
+            // the channel must same in PostWasCreated Class
+            Echo.private('posts').listen('PostWasCreated', function (e) {
+                // console.log(e)
+                __WEBPACK_IMPORTED_MODULE_2__event_js___default.a.$emit('post-added', e.post);
+            });
+
             _this.posts = response.data;
         });
     }
