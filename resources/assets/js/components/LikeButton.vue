@@ -15,7 +15,7 @@
             like () {
                 axios.post('/posts/' + this.postId + '/likes')
                 .then(response => {
-                    eventHub.$emit('post-liked', this.postId)
+                    eventHub.$emit('post-liked', this.postId, true)
                 })
             }
         }

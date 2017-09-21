@@ -47465,12 +47465,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addPost: function addPost(post) {
             this.posts.unshift(post);
         },
-        likePost: function likePost(postId) {
+        likePost: function likePost(postId, likedByCurrentUser) {
             var i;
             for (var i = 0; i <= this.posts.length; i++) {
                 if (this.posts[i].id === postId) {
                     this.posts[i].likeCount++;
-                    this.posts[i].likeByCurrentUser = true;
+
+                    if (likedByCurrentUser) {
+                        this.posts[i].likedByCurrentUser = true;
+                    }
                     break;
                 }
             }
@@ -47491,7 +47494,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
 
             Echo.private('likes').listen('PostWasLiked', function (e) {
-                __WEBPACK_IMPORTED_MODULE_2__event_js___default.a.$emit('post-liked', e.post.id);
+                __WEBPACK_IMPORTED_MODULE_2__event_js___default.a.$emit('post-liked', e.post.id, false);
             });
 
             _this.posts = response.data;
@@ -48171,7 +48174,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.post('/posts/' + this.postId + '/likes').then(function (response) {
-                __WEBPACK_IMPORTED_MODULE_0__event_js___default.a.$emit('post-liked', _this.postId);
+                __WEBPACK_IMPORTED_MODULE_0__event_js___default.a.$emit('post-liked', _this.postId, true);
             });
         }
     }
