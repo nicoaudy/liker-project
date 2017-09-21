@@ -1,6 +1,6 @@
 <template>
     <div class="media">
-        <like-button :post-id="post.id" v-if="post.likedByCurrentUser === false && post.canBeLikedByCurrentUser === true"></like-button>
+        <like-button :post-id="post.id" v-if="post.likedByCurrentUser === false && post.user.id !== $root.user.id"></like-button>
 
         <div class="media-left">
             <a href="#">
